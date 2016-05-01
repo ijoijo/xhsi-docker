@@ -4,7 +4,8 @@
 
 A Docker image for [XHSI application](xhsi.sourceforge.net).
 
-You can find the Docker Hub repo here: [https://hub.docker.com/r/ijoijo/armhf-swift/](https://hub.docker.com/r/ijoijo/xhsi/)
+You can find the Docker Hub repo here: https://hub.docker.com/r/ijoijo/xhsi/
+
 
 ### Pre-requisites
 Have x-plane flight simulator running on the same network as the docker host, with XHSI plugins installed and up&running.
@@ -23,7 +24,7 @@ docker pull ijoijo/xhsi
 
 ```bash
 docker run -it ijoijo/xhsi
-
+```
 
 ### Contributions
 
