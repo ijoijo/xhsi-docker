@@ -8,4 +8,6 @@ RUN wget "http://downloads.sourceforge.net/project/xhsi/xhsi/XHSI-2-0-Beta-8.zip
 VOLUME /XHSI
 COPY entrypoint.sh /
 
+WORKDIR /XHSI
+
 ENTRYPOINT ["/entrypoint.sh"]
