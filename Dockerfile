@@ -2,7 +2,7 @@ FROM multiarch/alpine:armhf-v3.3
 
 RUN echo "http://nl.alpinelinux.org/alpine/v3.3/community" >> /etc/apk/repositories \
   && apk update \
-  && apk add openjdk7-jre-base \
+  && apk add openjdk7-jre ttf-dejavu \
   && rm -rf /var/cache/apk/*   
 
 RUN wget "http://downloads.sourceforge.net/project/xhsi/xhsi/XHSI-2-0-Beta-8.zip" \
