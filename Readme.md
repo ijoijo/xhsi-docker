@@ -27,7 +27,6 @@ $ docker pull ijoijo/xhsi
 $ docker run \
     --net host \ # Required for multicast (automated IP address detection for XHSI)
     -v /tmp/.X11-unix:/tmp/.X11-unix \ # Mount the X11 socket
-    -e XHSI_DISPLAY=unix$DISPLAY \ # Set display
     --name xhsi \
     ijoijo/xhsi
 ```
@@ -46,6 +45,18 @@ $ docker run -it --rm --volumes-from xhsi alpine sh
 
 / # ls /XHSI/
 XHSI.log         XHSI.properties
+```
+
+
+To use a specific XHSI configuration files hosted on your host (replace with correct folder path of your host containing the XHSI configuration):
+
+```bash
+$ docker run \
+    --net host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /XHSIDirectoryOnYourHost/:/XHSI \
+    --name xhsi \
+    ijoijo/xhsi
 ```
 
 ##### Memory usage
