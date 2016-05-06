@@ -9,9 +9,10 @@ You can find the Docker Hub repo here: https://hub.docker.com/r/ijoijo/xhsi/
 
 ### Pre-requisites
 
-Have x-plane flight simulator running on the same network as the docker host, with XHSI plugins installed and up&running.
+Have X-Plane flight simulator running on the same network as the docker host, with XHSI plugins installed and up&running.
 
 Have a X server running, as XHSI application requires X11 for the  display on Linux.
+
 
 ### Docker Instructions
 
@@ -21,15 +22,36 @@ Have a X server running, as XHSI application requires X11 for the  display on Li
 $ docker pull ijoijo/xhsi
 ```
 
-#### Run XHSI
+
+#### Authorize docker to access X11
+
+Warning, this command authorize access on X11 for all local users, which could be a security issue if using multiple users on your host.
 
 ```bash
+$ xhost +local
+```
+ 
+#### Run XHSI
+
+Run the container with the following command:
+```bash
 $ docker run \
-    --net host \ # Required for multicast (automated IP address detection for XHSI)
-    -v /tmp/.X11-unix:/tmp/.X11-unix \ # Mount the X11 socket
+    --net host \ 
+    -v /tmp/.X11-unix:/tmp/.X11-unix \ 
     --name xhsi \
     ijoijo/xhsi
 ```
+
+To stop it:
+```bash
+$ docker stop xhsi
+```
+
+To start it:
+```bash
+$ docker start xhsi
+```
+
 
 #### Advanced usage
 
@@ -38,10 +60,10 @@ $ docker run \
 XHSI configuration and log files are stored in a specific volume.
 To access it, you can run your favourite docker image with XHSI volume.
 
-For example, to access XHSI data volume with Alpine linux:
+For example, to access XHSI data volume with Ubuntu linux:
 
 ```bash
-$ docker run -it --rm --volumes-from xhsi alpine sh
+$ docker run -it --rm --volumes-from xhsi ubuntu sh
 
 / # ls /XHSI/
 XHSI.log         XHSI.properties
@@ -69,13 +91,19 @@ For example, to set minimum memory to 256MB and maximum memory to 512MB:
 
 ```bash
 $ docker run \
-    --net host \ # Required for multicast (automated IP address detection for X$
-    -v /tmp/.X11-unix:/tmp/.X11-unix \ # Mount the X11 socket
-    -e XHSI_DISPLAY=unix$DISPLAY \ # Set display
-    -e XHSI_JAVA_OPTIONS="-Xms256m -Xmx512m" \ # Set specific java memory settings
+    --net host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e XHSI_JAVA_OPTIONS="-Xms256m -Xmx512m" \
     --name xhsi \
     ijoijo/xhsi
 ```
+
+
+##### X11 Display
+
+By default, XHSI is launched with the environment variable DISPLAY=:0.0
+
+If you would like to change it; you can specify XHSI_DISPLAY environment variable.
 
 
 ### Contributions
@@ -86,4 +114,5 @@ Any suggestions and contributions are welcome and encouraged
 ### License
 
 XHSI software is licensed under the GPLv2 license.
-The code for this docker container is licensed under the [MIT License.](LICENSE.md)
+Oracle Java JRE is licensed by the [Oracle Binary Code License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
+The code for this docker container is licensed under the [MIT License](LICENSE.md).
