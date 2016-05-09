@@ -2,7 +2,7 @@
 
 ### What is this?
 
-A Docker image for [XHSI application](xhsi.sourceforge.net).
+A Docker image for [XHSI application](http://xhsi.sourceforge.net).
 
 You can find the Docker Hub repo here: https://hub.docker.com/r/ijoijo/xhsi/
 
