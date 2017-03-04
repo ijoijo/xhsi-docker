@@ -7,9 +7,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886 \
   && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends oracle-java8-installer unzip libxext6 libxrender1 libxtst6 libxi6 \
   && rm -rf /var/lib/apt/lists/*
 
-RUN wget "http://downloads.sourceforge.net/project/xhsi/xhsi/XHSI-2-0-Beta-8.zip" \
-  && unzip XHSI-2-0-Beta-8.zip \
-  && rm -rf XHSI-2-0-Beta-8.zip XHSI2_plugin XHSI2_app/Windows XHSI2_app/Linux XHSI2_app/Mac \
+RUN wget "http://downloads.sourceforge.net/project/xhsi/xhsi/XHSI-2-0-Beta-9.zip" \
+  && unzip XHSI-2-0-Beta-9.zip \
+  && rm -rf XHSI-2-0-Beta-9.zip XHSI2_plugin XHSI2_app/Windows XHSI2_app/Linux XHSI2_app/Mac \
   && mkdir /XHSI
 
 VOLUME /XHSI
