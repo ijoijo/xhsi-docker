@@ -13,4 +13,4 @@ if [ ! -n "${XHSI_JAVA_OPTIONS}" ]; then
   export XHSI_JAVA_OPTIONS="-Xms512m -Xmx1024m"
 fi
 
-java ${XHSI_JAVA_OPTIONS} -jar /XHSI2_app/Java/XHSI.jar
+java ${XHSI_JAVA_OPTIONS} -jar /XHSI2_app/XHSI.jar
