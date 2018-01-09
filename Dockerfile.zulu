@@ -1,0 +1,30 @@
+FROM ubuntu:16.04
+
+RUN set -eux; \
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0x219BD9C9; \
+  echo "deb http://repos.azulsystems.com/ubuntu stable main" >> /etc/apt/sources.list; \
+  apt-get update; \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends unzip libxext6 libxrender1 libxtst6 libxi6 ca-certificates wget; \
+  \
+  dpkgArch="$(dpkg --print-architecture)"; \
+	case "${dpkgArch##*-}" in \
+		amd64) zuluPackage='zulu-8' ;; \
+		armhf) zuluPackage='zulu-embedded-8' ;; \
+		arm64) zuluPackage='zulu-embedded-8' ;; \
+		*) echo >&2; echo >&2 "warning: current architecture ($dpkgArch) does not have a corresponding zulu java binary release; exiting"; echo >&2 ; exit 1 ;; \
+	esac; \
+	\
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "${zuluPackage}"; \
+  rm -rf /var/lib/apt/lists/*
+
+RUN wget "http://downloads.sourceforge.net/project/xhsi/xhsi/XHSI-2-0-Beta-10.zip" \
+  && unzip XHSI-2-0-Beta-10.zip \
+  && rm -rf XHSI-2-0-Beta-10.zip XHSI2_plugin \
+  && mkdir /XHSI
+
+VOLUME /XHSI
+COPY entrypoint.sh /
+
+WORKDIR /XHSI
+
+ENTRYPOINT ["/entrypoint.sh"]
